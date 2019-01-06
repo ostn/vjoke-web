@@ -345,7 +345,7 @@
                     name = name ? name.slice(0, 1) : v.user_name.slice(0, 2);
                     Array.from(dom).forEach(d => {
                         d.removeAttribute('style');
-						d.style.backgroundColor = '#f60';
+						d.style.backgroundColor = '#000';
                         d.style.color = '#fff';
                         if (v.user_pic) {
                             d.style.backgroundImage = 'url(' + v.user_pic + ')';
