@@ -2,7 +2,7 @@
 export default {
     web_name:'微笑话管理系统',
     web_domain:'http://127.0.0.1:3001',	//访问域名
-    web_url:'http://127.0.0.1:3000',	//访问域名
+    web_url:'http://127.0.0.1',	//访问域名
     nick_reg:/^[a-z\d\u4e00-\u9fa5]{1,8}$/, //昵称验证
     nick_txt:'最长不超过8个英文或中文字符', //昵称规则
 	name_reg:/^[a-zA-Z0-9_-]{4,10}$/i, //帐号验证

@@ -24,7 +24,7 @@ module.exports = {
     dev: {
         env: require('./dev.env'),
         host: '127.0.0.1', // 本地地址
-        port: 3000,
+        port: 80,
         autoOpenBrowser: false,
         assetsSubDirectory: 'static',
         assetsPublicPath: '/',
