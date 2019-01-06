@@ -1,7 +1,12 @@
+<<<<<<< HEAD
 # vjoke-web
 
 ### 本项目参照  https://github.com/scscms/vue-scscms
 
+=======
+# vjoke-web （本项目参照 https://github.com/scscms/vue-scscms 点击这里<a href="https://github.com/scscms/vue-scscms">这里</a>）
+
+>>>>>>> f399dadc925069696cbce9675d2a295001c14095
 基于koa2+mysql+vue2.0+vue全家桶+Element 后台管理系统
 
     简单文章系统模板，含注册、登录、权限管理、用户管理范例。旨在提供一个完整的前后台node+vue2.0开发的脚手架，由您按需扩展。
