@@ -113,6 +113,15 @@
                                     message: '保存成功',
                                     type: 'success'
                                 });
+								storage.get('userInfo',obj=>{
+									// 判断操作用户是否为登录用户，是：更新头像
+									if(obj.userInfo.user_name == this.data.user_name) {
+										Array.from(document.querySelectorAll(".top_right p,.user_info dt")).forEach(d => {
+										    d.style.backgroundImage = 'url(' + this.data.user_pic + ')';
+										    d.textContent = '';
+										})
+									}
+								});
                                 this.$router.push('/user/list');
                             }else{
                                 this.err = err;
@@ -132,10 +141,6 @@
             },
             successUpload(data){
                 this.data.user_pic = data.filename;
-				Array.from(document.querySelectorAll(".top_right p,.user_info dt")).forEach(d => {
-				    d.style.backgroundImage = 'url(' + this.data.user_pic + ')';
-				    d.textContent = '';
-				})
             }
         },
         mounted() {
