@@ -1,6 +1,6 @@
 # vjoke-web
 
-### 本项目参照 https://github.com/scscms/vue-scscms
+### 本项目参照  https://github.com/scscms/vue-scscms
 
 基于koa2+mysql+vue2.0+vue全家桶+Element 后台管理系统
 
