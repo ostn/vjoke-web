@@ -132,6 +132,10 @@
             },
             successUpload(data){
                 this.data.user_pic = data.filename;
+				Array.from(document.querySelectorAll(".top_right p,.user_info dt")).forEach(d => {
+				    d.style.backgroundImage = 'url(' + this.data.user_pic + ')';
+				    d.textContent = '';
+				})
             }
         },
         mounted() {
