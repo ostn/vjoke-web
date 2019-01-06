@@ -23,9 +23,15 @@
 
         <el-dialog :title="title[type]" :visible.sync="register.visible" size="tiny">
             <el-form :model="form" :rules="register.rules" label-width="80px" ref="regForm">
-                <el-form-item label="帐号" prop="user_name" v-if="type=='register'">
-                    <el-input v-model="form.user_name" :placeholder="placeholder.name"></el-input>
+                <el-form-item label="昵称" prop="nick_name" v-if="type=='register'">
+                    <el-input v-model="form.nick_name" :placeholder="placeholder.nick"></el-input>
                 </el-form-item>
+				<el-form-item label="帐号" prop="user_name" v-if="type=='register'">
+				    <el-input v-model="form.user_name" :placeholder="placeholder.name"></el-input>
+				</el-form-item>
+				<el-form-item label="手机" prop="user_tel" v-if="type=='register'">
+				    <el-input v-model="form.user_tel" :placeholder="placeholder.tel"></el-input>
+				</el-form-item>
                 <el-form-item label="邮箱" prop="user_email">
                     <el-input v-model="form.user_email" :placeholder="placeholder.email"></el-input>
                 </el-form-item>
@@ -56,9 +62,11 @@
                     pass_word: ''
                 },
                 placeholder:{
+					nick: common.nick_txt,
                     name:common.name_txt,
                     pass:common.pass_txt,
                     email:common.email_txt,
+                    tel:common.tel_txt
                 },
                 title:{
                     register:'用户注册',
@@ -91,6 +99,22 @@
                     visible:false,
                     loading:false,
                     rules: {
+						nick_name: [{
+						    required: true,
+						    message: '用户昵称不能为空！',
+						    trigger: 'change'
+						}, {
+						    validator: (rule, value, callback) => {
+						        if (!common.nick_reg.test(value)) {
+						            callback(new Error(common.nick_txt));
+						        } else if (_this.err.includes('昵称')) {
+						            callback(new Error(_this.err));
+						        } else {
+						            callback();
+						        }
+						    },
+						    trigger: 'change'
+						}],
                         user_name: [{
                             required: true,
                             message: '用户帐号不能为空！',
@@ -138,6 +162,22 @@
                             },
                             trigger: 'change'
                         }],
+						user_tel: [{
+						    required: true,
+						    message: '手机号不能为空！',
+						    trigger: 'change'
+						}, {
+						    validator: (rule, value, callback) => {
+						        if (!common.tel_reg.test(value)) {
+						            callback(new Error(common.tel_txt));
+						        } else if (_this.err.includes('手机')) {
+						            callback(new Error(_this.err));
+						        } else {
+						            callback();
+						        }
+						    },
+						    trigger: 'change'
+						}],
                         user_email: [{
                             required: true,
                             message: '邮箱不能为空！',
@@ -157,7 +197,9 @@
                     }
                 },
                 form:{
+                    nick_name:'',
                     user_name:'',
+					user_tel:'',
                     pass_word:'',
                     pass_words:'',
                     user_email:''
@@ -186,7 +228,7 @@
                             cancelButtonText: '取消',
                             type: 'warning'
                         }).then(() => {
-                            this.register.loading = true;
+							this.register.loading = true;
                             ajax.call(this, '/' + this.type, this.form, (data, err) => {
                                 this.register.loading = false;
                                 if (!err) {
@@ -198,9 +240,18 @@
                                     });
                                 } else {
                                     this.err = err;
-                                    if (err.includes('帐号') || err.includes('邮箱')) {
-                                        this.$refs.regForm.validateField(err.includes('帐号') ? 'user_name' : 'user_email');
+                                    if (err.includes('昵称')) {
+                                        this.$refs.regForm.validateField('nick_name');
                                     }
+									if (err.includes('帐号')) {
+									    this.$refs.regForm.validateField('user_name');
+									}
+									if (err.includes('手机')) {
+									    this.$refs.regForm.validateField('user_tel');
+									}
+									if (err.includes('邮箱')) {
+									    this.$refs.regForm.validateField('user_email');
+									}
                                 }
                             })
                         }).catch(() => {
@@ -230,23 +281,25 @@
             }
         },
         watch: {
+            'form.nick_name'(){
+                if(this.err.includes('昵称'))this.err = '';
+            },
             'form.user_name'(){
                 if(this.err.includes('帐号'))this.err = '';
             },
-            'form.user_email'(){
-                if(this.err.includes('邮箱'))this.err = '';
-            }
+			'form.user_tel'(){
+			    if(this.err.includes('手机'))this.err = '';
+			},
+			'form.user_email'(){
+			    if(this.err.includes('邮箱'))this.err = '';
+			}
         }
     };
 </script>
 
 <style lang="less">
     .login {
-        // background:#373a42 url('../assets/bg.jpg') no-repeat center;
-				background-image: linear-gradient(to right , #7A88FF, #7AFFAF);
-				// background-image: linear-gradient(to bottom , #7A88FF, #7AFFAF);
-				// background-image: linear-gradient(to bottom right, #7A88FF, #7AFFAF);
-				// background-image: linear-gradient(45deg, #7A88FF, #7AFFAF);
+		background-image: linear-gradient(to right , #7A88FF, #7AFFAF);
         background-size: cover;
         .el-dialog__body{
             padding-bottom:0
@@ -259,7 +312,6 @@
             background: #fff;
             background-clip: padding-box;
             box-shadow: 0 6px 40px rgba(0,0,0,.4);
-            // border: 5px solid rgba(0, 100, 200, .3);
             padding: 16px;
             width: 30%;
             min-width: 300px;
@@ -270,7 +322,6 @@
 					text-align: center;
 					font-size: 40px;
 					font-family: cursive;
-					
 					
 					display: block;
 					width: 100%;
@@ -287,18 +338,6 @@
 					/*背景图片向水平方向扩大一倍，这样background-position才有移动与变化的空间*/
 					/* 动画 */
 					animation: masked-animation 3s infinite linear;
-					
-					@keyframes masked-animation {
-						0% {
-							background-position: 0 0;
-							/*background-position 属性设置背景图像的起始位置。*/
-						}
-					
-						100% {
-							background-position: -100% 0;
-						}
-					}
-					
 				}
                 height: 64px;
                 margin-bottom: 15px;
@@ -309,6 +348,17 @@
             }
         }
     }
+	
+	@keyframes masked-animation {
+		0% {
+			background-position: 0 0;
+			/*background-position 属性设置背景图像的起始位置。*/
+		}
+	
+		100% {
+			background-position: -100% 0;
+		}
+	}
 	
 	
 </style>

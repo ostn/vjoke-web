@@ -267,7 +267,7 @@
                 this.$refs.picForm.validate(v => {
                     if (v) {
                         ajax.call(this, '/upUserPic', {pic:this.upUserPic.pic}, (data, err) => {
-                            if (!err) {
+							if (!err) {
                                 storage.get('userInfo',obj=>{
                                     obj.userInfo.user_pic = data.pic;
                                     storage.set('userInfo',obj);
@@ -474,7 +474,7 @@
                 }
             }
             .top_left {
-                width: 195px;
+                width: 200px;
                 animation: left_open .3s;
                 background: url('../assets/vjoke_logo.png') no-repeat;
 				background-size: cover;
