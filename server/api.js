@@ -70,12 +70,15 @@ async function passedUser(ctx){
     let data = ctx.request.body;
     let ids = data.ids;
     let msg;
+	let rows;
     if(/^\d+(,\d+)*$/.test(ids)){
         const arr = ids.split(',');
         ids = new Array(arr.length).fill("?").join(',');
         const connection = await mysql.createConnection(config.mysqlDB);
         const [result] = await connection.execute(`UPDATE user SET user_type=4 where user_type=0 and id in (${ids})`, arr);
-        msg = result.affectedRows > 0 ? '':'审核用户失败！';
+		// 受影响的行数
+		rows = result.affectedRows;
+        msg = result.affectedRows > 0 ? '':'暂无需要审核的用户！';
         await connection.end();
     }else{
         msg = 'ID参数不合法';
@@ -83,7 +86,10 @@ async function passedUser(ctx){
     ctx.body = {
         success: !msg,
         message: msg,
-        data: {passed:4}
+        data: {
+			affectedRows: rows,
+			passed:4,
+		}
     }
 }
 //删除用户（禁止删除管理员）

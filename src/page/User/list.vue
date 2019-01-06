@@ -22,6 +22,7 @@
                 </el-form-item>
             </el-form>
             <el-button type="danger" :disabled="grade.deleteUser" @click='deleteUser()'>批量删除</el-button>
+            <el-button type="success" :disabled="grade.passedUser" @click='passedUser()'>批量通过</el-button>
             <el-table stripe border style="width:100%;margin-top:10px" :data="table_data.data" @selection-change="handleSelectionChange">
                 <el-table-column type="selection" :selectable="selectable" width="55"></el-table-column>
                 <el-table-column
@@ -114,7 +115,7 @@
                     ])
                 }else if(key === 'user_type'){
                     if(str === '0'){
-                        return this.createButton(h,row,key,'通过');
+                        return this.createButton(h,row,'passed','通过');
                     }
                     str = common.user_type[str]||'未知';
                 }
@@ -139,12 +140,25 @@
                 }).catch(() => {});
             },
             passedUser(arr){
+				if(!arr){
+				    if(this.multipleSelection.length){
+				        arr = this.multipleSelection;
+						if(arr.map(o=>o.user_type).indexOf(0) < 0) return this.$message("所选结果已通过");
+				    }else{
+				        return this.$message("请先选择用户");
+				    }
+				}
                 ajax.call(this, '/passedUser', {ids:arr.map(o=>o.id).join(",")}, (obj, err) => {
                     if (!err) {
                         arr.forEach(row=>{
                             row.passed = obj.passed;
                         })
-                    }
+						this.$message({
+						    message: '保存成功 ' + obj.affectedRows + '条',
+						    type: 'success'
+						});
+						this.onSearch();
+                    } 
                 });
             },
             add(){
