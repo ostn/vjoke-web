@@ -30,7 +30,7 @@ export default {
 	    secure: true,
 	    auth: {
 			user: 'vjoker@163.com', // DT:SPM 163 smtp5 消息内容被网易拦截识别为垃圾邮件，需要修改内容
-	        pass: ''********''	// 账号授权码
+	        pass: '********'	// 账号授权码
 	    }
 	},
     //公用：获取客户端IP
