@@ -3,10 +3,12 @@
 DROP TABLE IF EXISTS `user`;
 CREATE TABLE `user` (
   `id` int(10) unsigned NOT NULL AUTO_INCREMENT COMMENT '主键',
+	`nick_name` char(50) NOT NULL DEFAULT '' COMMENT '用户昵称',
   `user_name` char(50) NOT NULL DEFAULT '' COMMENT '用户帐号',
   `pass_word` char(128) NOT NULL DEFAULT '' COMMENT '用户密码',
   `user_type` tinyint(1) unsigned NOT NULL DEFAULT '0' COMMENT '用户类型 0:未审核用户;1:超级管理员;2:普通管理员;3:VIP用户;4:普通用户',
   `user_email` char(128) NOT NULL DEFAULT '' COMMENT '邮箱地址',
+	`user_tel` char(50) NOT NULL DEFAULT '' COMMENT '邮箱地址',
   `create_time` timestamp DEFAULT '0000-00-00 00:00:00' COMMENT '注册时间',
   `login_ip` char(15) NOT NULL DEFAULT '' COMMENT '登录IP',
   `update_time` timestamp NOT NULL DEFAULT '0000-00-00 00:00:00' ON UPDATE CURRENT_TIMESTAMP COMMENT '最后登录时间',
@@ -56,5 +58,5 @@ CREATE TABLE `upload` (
   KEY `user_id` (`user_id`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8 COMMENT='上传列表';
 
-INSERT INTO user (user_name,pass_word,user_type,user_email) VALUES ('admin','$2a$10$C/6T6ubgSH5hE/OdLhawJOxktcFSZQIR8gOqrJ0s7xez/kBquPJpK',1,'shenwenhao@163.com');
+INSERT INTO user (nick_name,user_name,pass_word,user_type,user_email,user_tel) VALUES ('系统管理员','admin','$2a$10$C/6T6ubgSH5hE/OdLhawJOxktcFSZQIR8gOqrJ0s7xez/kBquPJpK',1,'shenwenhao@163.com',18699993180);
 #可选的操作：插入用户：admin  密码：rd123456
