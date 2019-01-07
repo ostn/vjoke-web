@@ -5,8 +5,18 @@
 </template>
 
 <script>
-    export default {
-    };
+    module.exports = {
+        name: 'not',
+        mounted() {
+			this.$message({
+				message: "正在跳转到登陆界面",
+				duration: 2000
+			})
+			setTimeout(() => {
+				this.$router.push('/login');
+			}, 2000)
+         }
+    }
 </script>
 
 <style lang="less" scoped>
