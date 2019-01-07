@@ -88,7 +88,7 @@
             createButton(h, row, code, text){
                 let self = this;
                 let dis = false;
-                if(code === 'user_type' && this.grade.passedUser
+                if(code === 'passed' && this.grade.passedUser
                 ||code === 'edit' && this.grade.updateUser
                 ||code === 'delete' && (/^1|2$/.test(row.user_type)||this.grade.deleteUser)){
                     dis = true;
