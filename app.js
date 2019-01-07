@@ -58,8 +58,8 @@ app.use(router.routes()); // 将路由规则挂载到Koa上。
 app.use(historyApiFallback());
 app.use(serve(path.resolve('dist'))); // 将webpack打包好的项目目录作为Koa静态文件服务的目录
 
-app.listen(3001, () => {
-    console.log('Koa is listening in 3001');
+app.listen(8080, () => {
+    console.log('Koa is listening in 8080');
 });
 
 export default app;
