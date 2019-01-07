@@ -13,16 +13,6 @@ export default {
         secret : 'scscms', // 指定密钥
         expiresIn:'2h'  //超时设置 m分钟 h小时 d天数
     },
-    // 126邮箱服务配置
-//     emailServer:{
-//         host: 'smtp.126.com',
-//         port: 465,
-//         secure: true,
-//         auth: {
-// 			user: 'vjokes@126.com', // DT:SPM 126 smtp5 消息内容被网易拦截识别为垃圾邮件，需要修改内容
-//             pass: '********'	// 账号授权码
-//         }
-//     },
 	// 163邮箱服务配置 TODO 后续使用该配置
 	emailServer:{
 	    host: 'smtp.163.com',
