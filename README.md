@@ -16,7 +16,7 @@
 ### 安装
 
 ```
-git clone https://github.com/ostn/vjoke-app.git
+git clone https://github.com/ostn/vjoke-web.git
 
 //先git克隆或者下载下来，进入项目目录执行npm命令
 
@@ -176,6 +176,6 @@ npm run server
 
 ### 实践项目
 
-- [微笑话App版](https://github.com/ostn/vjoke-app)
+- [微笑话Web版](https://github.com/ostn/vjoke-web)
 
 ---
