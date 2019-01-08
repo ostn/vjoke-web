@@ -27,7 +27,9 @@
                     <el-button size="small" @click="showChange" :disabled="grade.changePassword">修改密码</el-button>
                 </div>
             </div>
-            <div class="el-col top_left"></div>
+            <div class="el-col top_left" @click="goHome">
+				Vjoke
+			</div>
             <div class="el-col el-col-1" style="width:40px">
                 <i class="fa fa-bars" @click="isCollapse=!isCollapse"></i>
             </div>
@@ -336,6 +338,10 @@
                     },false)
                 }
             },
+			goHome(){
+				// 跳转登陆后的漠然路由页面
+				this.$router.replace('/article/list');
+			},
             setUserInfo(){
                 //因不想太多变量和条件判断及style在html里，在此使用js来修改dom
                 let dom = document.querySelectorAll(".top_right p,.user_info dt");
@@ -476,8 +482,27 @@
             .top_left {
                 width: 200px;
                 animation: left_open .3s;
-                background: url('../assets/vjoke_logo.png') no-repeat;
-				background-size: cover;
+				cursor: pointer;
+				
+				text-align: center;
+				font-size: 40px;
+				font-family: unset;
+				font-weight: bold;
+				display: block;
+				// width: 100%;
+				height: 100%;
+				/*渐变背景*/
+				background-image: -webkit-linear-gradient(left, #3498db, #f47920 10%, #d71345 20%, #f7acbc 30%,
+					#ffd400 40%, #3498db 50%, #f47920 60%, #d71345 70%, #f7acbc 80%, #ffd400 90%, #3498db);
+				color: transparent;
+				/*文字填充色为透明*/
+				-webkit-text-fill-color: transparent;
+				-webkit-background-clip: text;
+				/*背景剪裁为文字，只将文字显示为背景*/
+				background-size: 200% 100%;
+				/*背景图片向水平方向扩大一倍，这样background-position才有移动与变化的空间*/
+				/* 动画 */
+				animation: masked-animation 4s infinite linear;
             }
             .top_right {
                 width: 200px;
@@ -628,4 +653,15 @@
             width:~'calc(100% - 64px)';
         }
     }
+	
+	@keyframes masked-animation {
+		0% {
+			background-position: 0 0;
+			/*background-position 属性设置背景图像的起始位置。*/
+		}
+	
+		100% {
+			background-position: -100% 0;
+		}
+	}
 </style>
