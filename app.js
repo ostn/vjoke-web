@@ -40,18 +40,18 @@ app.use(async (ctx, next)=>{
         }
 	}
     const ms = new Date - start;
-    writeLog(ctx.method + ' ' + ctx.url + ' ' + ms + 'ms' + '  ' +DATE.format('YYYY-MM-DD HH:mm:ss') +'\r\n');
-    console.log(' %s %s  %sms  %s', ctx.method, ctx.url, ms, DATE.format('YYYY-MM-DD HH:mm:ss'));
+    writeLog(ctx.method + ' ' + ctx.url + ' ' + ms + 'ms' + '  ' + DATE.format('YYYY-MM-DD HH:mm:ss') +'\r\n');
+    console.log(' %s \x1B[37m %s  \x1B[37m %s ms  \x1B[33m %s', ctx.method, ctx.url, ms, DATE.format('YYYY-MM-DD HH:mm:ss'));
 });
 
 app.on('error', function (err, ctx) {
-    writeLog('server error' + err + '\n' + JSON.stringify(ctx) + '\r\n');
+    writeLog('server error' + err + '  ' + DATE.format('YYYY-MM-DD HH:mm:ss') + '\n' + JSON.stringify(ctx) + '\r\n');
     ctx.body = {
         success: false,
         data:ctx,
         message: err
     };
-    console.log('server error', err);
+    console.log('server error', err, DATE.format('YYYY-MM-DD HH:mm:ss'));
 });
 
 router.use('/api', routes_obj.routes.routes());
