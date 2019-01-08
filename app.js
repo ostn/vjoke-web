@@ -42,7 +42,7 @@ app.use(async (ctx, next)=>{
 	const DATE = moment();
     const ms = new Date - start;
     writeLog(ctx.method + ' ' + common.web_url + ctx.url + ' ' + ms + 'ms' + '  ' + DATE.format('YYYY-MM-DD HH:mm:ss') +'\r\n');
-    console.log(' %s %s %s %s ms  \x1B[33m %s', ctx.method, common.web_url, ctx.url, ms, DATE.format('YYYY-MM-DD HH:mm:ss'));
+    console.log(' %s %s%s %s ms  \x1B[33m %s', ctx.method, common.web_url, ctx.url, ms, DATE.format('YYYY-MM-DD HH:mm:ss'));
 });
 
 app.on('error', function (err, ctx) {
