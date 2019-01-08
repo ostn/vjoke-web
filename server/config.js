@@ -10,7 +10,7 @@ export default {
     upPath:'dist/upFile/',//上传路径
     //token 配置
     JWTs : {
-        secret : 'scscms', // 指定密钥
+        secret : 'vjoke', // 指定密钥
         expiresIn:'2h'  //超时设置 m分钟 h小时 d天数
     },
     // 126邮箱服务配置
