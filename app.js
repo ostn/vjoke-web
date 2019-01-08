@@ -3,6 +3,7 @@ import Koa from 'koa';
 import koa_router from "koa-router";
 import json from 'koa-json';
 import logger from 'koa-logger';
+import moment from 'moment';
 
 import path from 'path';
 import serve from 'koa-static';
@@ -13,6 +14,7 @@ import routes_obj from './server/routes.js';
 
 const app = new Koa();
 const router = koa_router();
+const DATE = moment();
 
 app.use(koa_bodyparser());
 app.use(json());
@@ -38,8 +40,8 @@ app.use(async (ctx, next)=>{
         }
 	}
     const ms = new Date - start;
-    writeLog(ctx.method + ' ' + ctx.url + ' ' + ms + 'ms \r\n');
-    console.log('%s %s - %s', ctx.method, ctx.url, ms);
+    writeLog(ctx.method + ' ' + ctx.url + ' ' + ms + 'ms' + '  ' +DATE.format('YYYY-MM-DD HH:mm:ss') +'\r\n');
+    console.log(' %s %s  %sms  %s', ctx.method, ctx.url, ms, DATE.format('YYYY-MM-DD HH:mm:ss'));
 });
 
 app.on('error', function (err, ctx) {
