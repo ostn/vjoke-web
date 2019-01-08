@@ -11,10 +11,10 @@ import historyApiFallback from 'koa2-history-api-fallback';
 
 import koa_bodyparser from "koa-bodyparser";
 import routes_obj from './server/routes.js';
+import common from './server/common.js';
 
 const app = new Koa();
 const router = koa_router();
-const DATE = moment();
 
 app.use(koa_bodyparser());
 app.use(json());
@@ -39,12 +39,14 @@ app.use(async (ctx, next)=>{
             message: result
         }
 	}
+	const DATE = moment();
     const ms = new Date - start;
-    writeLog(ctx.method + ' ' + ctx.url + ' ' + ms + 'ms' + '  ' + DATE.format('YYYY-MM-DD HH:mm:ss') +'\r\n');
-    console.log(' %s \x1B[37m %s  \x1B[37m %s ms  \x1B[33m %s', ctx.method, ctx.url, ms, DATE.format('YYYY-MM-DD HH:mm:ss'));
+    writeLog(ctx.method + ' ' + common.web_url + ctx.url + ' ' + ms + 'ms' + '  ' + DATE.format('YYYY-MM-DD HH:mm:ss') +'\r\n');
+    console.log(' %s %s %s %s ms  \x1B[33m %s', ctx.method, common.web_url, ctx.url, ms, DATE.format('YYYY-MM-DD HH:mm:ss'));
 });
 
 app.on('error', function (err, ctx) {
+	const DATE = moment();
     writeLog('server error' + err + '  ' + DATE.format('YYYY-MM-DD HH:mm:ss') + '\n' + JSON.stringify(ctx) + '\r\n');
     ctx.body = {
         success: false,
