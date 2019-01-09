@@ -23,14 +23,22 @@ export default {
 //             pass: '********'	// 账号授权码
 //         }
 //     },
-	// 163邮箱服务配置 TODO 后续使用该配置
+	// 163邮箱服务配置
+// 	emailServer:{
+// 	    host: 'smtp.163.com',
+// 	    port: 465,
+// 	    secure: true,
+// 	    auth: {
+// 			user: 'vjoker@163.com', // DT:SPM 163 smtp5 消息内容被网易拦截识别为垃圾邮件，需要修改内容
+// 	        pass: 'shenyang5220333'	// 账号授权码
+// 	    }
+// 	},
+	// QQ邮箱服务配置
 	emailServer:{
-	    host: 'smtp.163.com',
-	    port: 465,
-	    secure: true,
+	    service: 'qq',
 	    auth: {
-			user: 'vjoker@163.com', // DT:SPM 163 smtp5 消息内容被网易拦截识别为垃圾邮件，需要修改内容
-	        pass: 'shenyang5220333'	// 账号授权码
+			user: 'system@vjoke.cn', // 邮箱账号
+	        pass: 'uwajnmlizbqlbihh'	// 账号授权码
 	    }
 	},
     //公用：获取客户端IP
