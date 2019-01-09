@@ -247,7 +247,7 @@ async function register(ctx) {
 						if(success){
 						    //发送激活邮件
 						    let link = `${common.web_url}/api/active/${data.user_name}/${data.pass_word.replace(/\//g,'')}`;
-						    let body = `hello：${data.user_name} <br/>Welcome to【${common.web_name}】 website，Please click the <a style="font-weight: bold; color: blue;" href="${link}" target="_blank">${link}</a> link to activate your account!`;
+						    let body = `您好：${data.nick_name} <br/><br/>    欢迎您成为【${common.web_name}】一员 ，请点击此链接 <a style="font-weight: bold; color: blue;" href="${link}" target="_blank">${link}</a> 来激活您的账号!<br/><br/><br/>微笑话官网: www.vjoke.cn`;
 						    if(await sendEmail(data.user_email, common.web_name+'【帐号激活】', body)){
 								await connection.end();
 						        return ctx.body = {
