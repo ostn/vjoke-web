@@ -25,6 +25,7 @@
 <script type="text/javascript">
     import {ajax,storage} from 'utils';
     import common from 'common';
+	import moment from 'moment';
     module.exports = {
         name: 'list',
         data() {
@@ -106,7 +107,7 @@
                         directives: [{name: "popover",rawName: "v-popover:pop",arg: "pop"}]
                     },row[key])]);
                 }else if(key === 'create_time'){
-                    str = str.replace(/[^-\d].+/,'');
+					str = moment(str).format('YYYY-MM-DD HH:mm:ss')
                 }else if(key === 'operations'){
                     let but = (row,type,name) => {
                         return h('el-button', {
