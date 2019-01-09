@@ -768,8 +768,10 @@ async function listUpFile(ctx) {
     console.log((page - 1) * pageSize,page * pageSize);
     const [list] = await connection.execute('SELECT a.*,u.`user_name` FROM upload as a LEFT JOIN user as u on a.user_id = u.id LIMIT ?, ?', [(page - 1) * pageSize,pageSize]);
     await connection.end();
+	let origin = null;
+	ctx.request.header.host.search("vjoke.cn") > -1 ? origin = common.web_url : origin = common.web_domain
     list.forEach(obj=>{
-        obj.full_path = common.web_domain + obj.file_path.replace(/\\/g,'/').replace('dist/','/');
+        obj.full_path = origin + obj.file_path.replace(/\\/g,'/').replace('dist/','/');
     });
     ctx.body = {
         success: true,

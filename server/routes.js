@@ -4,6 +4,7 @@ import config from './config.js'
 import api from './api'
 import common from './common'
 import koa_router from 'koa-router'
+import moment from 'moment';
 import multer from 'koa-multer';
 import fs from "fs"
 const routes = koa_router();
@@ -66,13 +67,15 @@ const storage = multer.diskStorage({
 routes.post('/upFile', multer({storage}).single('file'), async ctx => {
     const {originalname,mimetype,filename,path,size} = ctx.req.file;
     let msg,is_del = 0;
-    let fullPath = common.web_domain + config.upPath.replace('dist/','/') + filename;
+	let origin = null;
+	ctx.request.header.host.search("vjoke.cn") > -1 ? origin = common.web_url : origin = common.web_domain
+    let fullPath = origin + config.upPath.replace('dist/','/') + filename;
     if(size > common.upFile_maxSize || !common.upFile_accept.test(mimetype)) {
         msg = size > common.upFile_maxSize?'上传文件大小超出':'非法上传文件格式';
         is_del = 1;
         fs.unlinkSync(path);//同步删除文件
     }
-    await api.saveUpFile([ctx.state.userInfo.id,originalname,path,mimetype,size,is_del,new Date().toLocaleString()]);
+    await api.saveUpFile([ctx.state.userInfo.id,originalname,path,mimetype,size,is_del,moment().format('YYYY-MM-DD HH:mm:ss')]);
     ctx.body = {
         success: !msg,
         message:msg,
