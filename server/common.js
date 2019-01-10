@@ -29,12 +29,12 @@ export default {
     page_grade:{
         changePassword:4,//修改密码（必须登录）
         listSort:4,//分类列表（页面访问权限）
-        updateSort:4,//添加和更新分类权限
-        deleteSort:4,//删除分类权限
-        batchDelSort:4,//批量删除分类权限
+        updateSort:2,//添加和更新分类权限
+        deleteSort:2,//删除分类权限
+        batchDelSort:2,//批量删除分类权限
         delFile:2,	//批量或单个删除上传文件列表（管理员级别）
         upFile:4, //上传权限(共用)
-        listUpFile:4,//管理上传列表
+        listUpFile:2,//管理上传列表
         listUser:4,//用户列表
         updateUser:2,//添加、修改用户（超级管理员）
         passedUser:2,//审核用户列表
