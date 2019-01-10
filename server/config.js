@@ -1,38 +1,18 @@
-//后台配置文件
+// 后台配置文件
 export default {
-    //数据库配置
+    // 数据库配置
     mysqlDB : {
-		host:'localhost',
+		host:'127.0.0.1',
         user: 'root',
         password:'123456',
         database: 'vjoke'
     },
     upPath:'dist/upFile/',//上传路径
-    //token 配置
+    // token 配置
     JWTs : {
         secret : 'vjoke', // 指定密钥
         expiresIn:'2h'  //超时设置 m分钟 h小时 d天数
     },
-    // 126邮箱服务配置
-//     emailServer:{
-//         host: 'smtp.126.com',
-//         port: 465,
-//         secure: true,
-//         auth: {
-// 			user: 'vjokes@126.com', // DT:SPM 126 smtp5 消息内容被网易拦截识别为垃圾邮件，需要修改内容
-//             pass: '********'	// 账号授权码
-//         }
-//     },
-	// 163邮箱服务配置
-// 	emailServer:{
-// 	    host: 'smtp.163.com',
-// 	    port: 465,
-// 	    secure: true,
-// 	    auth: {
-// 			user: 'vjoker@163.com', // DT:SPM 163 smtp5 消息内容被网易拦截识别为垃圾邮件，需要修改内容
-// 	        pass: 'shenyang5220333'	// 账号授权码
-// 	    }
-// 	},
 	// QQ邮箱服务配置
 	emailServer:{
 	    service: 'qq',
@@ -41,7 +21,7 @@ export default {
 	        pass: 'uwajnmlizbqlbihh'	// 账号授权码
 	    }
 	},
-    //公用：获取客户端IP
+    // 公用：获取客户端IP
     getClientIP:function(ctx) {
         let req = ctx.request;
         let ip = ctx.ip ||
