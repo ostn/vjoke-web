@@ -8,6 +8,12 @@
     -moz-user-select:none;
     user-select:none
 }
+/* 解决移动端IOS不能输入问题 */
+*:not(input,textarea) { 
+    -webkit-touch-callout: none; 
+    -webkit-user-select: none; 
+}
+
 .clearfix:after { content: ''; display: block; clear: both; visibility: hidden; line-height: 0; height: 0; }
 html, body, #app {
     height: 100%
