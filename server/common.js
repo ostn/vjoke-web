@@ -32,7 +32,7 @@ export default {
         updateSort:4,//添加和更新分类权限
         deleteSort:4,//删除分类权限
         batchDelSort:4,//批量删除分类权限
-        delFile:4,	//批量或单个删除上传文件列表（管理员级别）
+        delFile:2,	//批量或单个删除上传文件列表（管理员级别）
         upFile:4, //上传权限(共用)
         listUpFile:4,//管理上传列表
         listUser:4,//用户列表
