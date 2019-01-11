@@ -65,7 +65,7 @@
                         {"key": "user_name", "name": "用户帐号", width: 150},
                         {"key": "user_email", "name": "用户邮箱", minWidth: 120},
                         {"key": "user_type", "name": "用户类型", width: 120},
-                        {"key": "create_time", "name": "注册时间", width:150},
+                        {"key": "create_time", "name": "注册时间", width:170},
                         {"key": "operations", "name": "操作", width: 135}
                     ],
                     data: []

@@ -5,6 +5,7 @@ import bcrypt from 'bcryptjs'
 import fs from "fs"
 import jwt from 'jsonwebtoken'
 import common from './common'
+import moment from 'moment';
 import nodemailer from 'nodemailer'
 
 //公用：获取客户端IP
@@ -179,7 +180,7 @@ async function updateUser(ctx) {
             msg = result.affectedRows === 1 ? '' : '修改用户失败';
         }else{
             array.push('create_time');
-            arr.push(new Date().toLocaleString());
+            arr.push(moment().format('YYYY-MM-DD HH:mm:ss'));
             arr[2] = bcrypt.hashSync(data.pass_word, bcrypt.genSaltSync(10));//加密密码
             //先检查是否占用帐号
             const [rows] = await connection.execute('SELECT user_name,user_email FROM `user` where `user_name`=? or `user_email`=?', [data.user_name,data.user_email]);
@@ -241,7 +242,7 @@ async function register(ctx) {
 					    msg = '邮箱已经被占用！';
 					}else{
 						data.pass_word = bcrypt.hashSync(data.pass_word, bcrypt.genSaltSync(10));
-						const result = await connection.execute('INSERT INTO `user` (nick_name,user_name,pass_word,create_time,login_ip,user_email,user_tel) VALUES (?,?,?,?,?,?,?)', [data.nick_name, data.user_name, data.pass_word, new Date().toLocaleString(), getClientIP(ctx),data.user_email, data.user_tel]);
+						const result = await connection.execute('INSERT INTO `user` (nick_name,user_name,pass_word,create_time,login_ip,user_email,user_tel) VALUES (?,?,?,?,?,?,?)', [data.nick_name, data.user_name, data.pass_word, moment().format('YYYY-MM-DD HH:mm:ss'), getClientIP(ctx),data.user_email, data.user_tel]);
 						success = result[0].affectedRows === 1;
 						msg = success ? '' : '写入数据库失败';
 						if(success){
@@ -507,7 +508,7 @@ async function updateArticle(ctx) {
             err = result.affectedRows === 1 ? '' :'文章修改失败';
         }else{
             //添加文章
-            array.push(new Date().toLocaleString());//添加日期
+            array.push(moment().format('YYYY-MM-DD HH:mm:ss'));//添加日期
             array.push(user.user_type < 3 ? 1 : 0);//是否通过审核
             array.push(user.id);//用户信息
             const [result] = await connection.execute('INSERT INTO `article` (title,description,read_type,sort_id,content,article_extend,create_time,passed,user_id) VALUES (?,?,?,?,?,?,?,?,?)', array);

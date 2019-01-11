@@ -72,6 +72,7 @@
 <script type="text/javascript">
     import {ajax,storage} from 'utils';
     import common from 'common';
+	import moment from 'moment';
     import Sidebar from 'components/Sidebar.vue';
     module.exports = {
         name: 'list',
@@ -201,7 +202,7 @@
                 let str = row[key]||'';
                 let h = this.$createElement;
                 if(key === 'create_time'){
-                    str = str.replace(/[^-\d].+/,'');
+                    str = moment(str).format('YYYY-MM-DD HH:mm:ss');
                 }else if(key === 'title'){
                     return h('span',{
                         style:{cursor:'pointer'},

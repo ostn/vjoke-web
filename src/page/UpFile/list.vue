@@ -107,7 +107,7 @@
                         directives: [{name: "popover",rawName: "v-popover:pop",arg: "pop"}]
                     },row[key])]);
                 }else if(key === 'create_time'){
-					str = moment(str).format('YYYY-MM-DD HH:mm:ss')
+					str = moment(str).format('YYYY-MM-DD HH:mm:ss');
                 }else if(key === 'operations'){
                     let but = (row,type,name) => {
                         return h('el-button', {
