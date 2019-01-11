@@ -41,6 +41,7 @@
 <script type="text/javascript">
     import {ajax,storage} from 'utils';
     import common from 'common';
+	import moment from 'moment';
     module.exports = {
         name: 'list',
         data() {
@@ -107,7 +108,7 @@
                 let str = row[key]+'';
                 let h = this.$createElement;
                 if(key === 'create_time'){
-                    str = str.replace(/[^-\d].+/,'');
+					str = moment(str).format('YYYY-MM-DD HH:mm:ss')
                 }else if(key === 'operations'){
                     return h('div',[
                         this.createButton(h,row,'edit','编辑'),
