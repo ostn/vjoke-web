@@ -5,7 +5,7 @@ import bcrypt from 'bcryptjs'
 import fs from "fs"
 import jwt from 'jsonwebtoken'
 import common from './common'
-import moment from 'moment';
+import moment from 'moment'
 import nodemailer from 'nodemailer'
 
 //公用：获取客户端IP
